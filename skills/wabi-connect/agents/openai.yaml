@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi connect a number"
+  short_description: "Connect your own WhatsApp Business number"
+  default_prompt: "Use $wabi-connect to connect our WhatsApp Business Account to Wabi and register our number."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true

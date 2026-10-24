@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi"
+  short_description: "Run WhatsApp Business from your agent"
+  default_prompt: "Use $wabi to show me my sandbox number, simulate a customer message and tell me what to set up next."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true

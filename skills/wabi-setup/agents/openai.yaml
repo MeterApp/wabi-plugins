@@ -1,0 +1,6 @@
+interface:
+  display_name: "Wabi setup"
+  short_description: "Connect the CLI, MCP or an API key"
+  default_prompt: "Use $wabi-setup to connect this machine to Wabi and add its MCP server."
+policy:
+  allow_implicit_invocation: true

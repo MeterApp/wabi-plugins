@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "wabi",
+  "displayName": "Wabi",
+  "version": "0.3.0",
+  "description": "The operating platform for WhatsApp Business, by Meter: connect your own WhatsApp Business Account (or start on a simulated sandbox number), send and receive messages, manage templates, contacts and AI support agents, and read usage and costs, from the conversation, the CLI or CI.",
+  "author": {
+    "name": "Meter",
+    "email": "jonathan@getwabi.dev",
+    "url": "https://meterapp.co"
+  },
+  "homepage": "https://getwabi.dev/docs?ref=plugin",
+  "repository": "https://github.com/MeterApp/wabi-plugins",
+  "license": "MIT",
+  "keywords": [
+    "whatsapp-business",
+    "whatsapp-cloud-api",
+    "messaging",
+    "inbox",
+    "customer-support",
+    "ai-agents",
+    "mcp"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "privacyPolicyUrl": "https://getwabi.dev/privacy?ref=plugin",
+  "termsOfServiceUrl": "https://getwabi.dev/terms?ref=plugin",
+  "supportUrl": "https://getwabi.dev/docs?ref=plugin",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Wabi API key (optional)",
+      "description": "Leave empty to sign in with your browser (/mcp). Or paste a wabi_\u2026 key from https://getwabi.dev/dashboard/settings?ref=plugin for a machine without a browser: Claude Code keeps it in your system's secure credential store and sends it only to the Wabi MCP server, in the X-Api-Key header.",
+      "sensitive": true,
+      "default": ""
+    }
+  },
+  "mcpServers": {
+    "wabi": {
+      "type": "http",
+      "url": "https://getwabi.dev/api/mcp",
+      "headers": {
+        "X-Wabi-Integration": "plugin",
+        "X-Api-Key": "${user_config.api_key}"
+      }
+    },
+    "wabi-catalog": {
+      "type": "http",
+      "url": "https://getwabi.dev/api/mcp/catalog",
+      "headers": {
+        "X-Wabi-Integration": "plugin"
+      }
+    }
+  }
+}

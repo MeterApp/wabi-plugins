@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi inbox"
+  short_description: "Work the inbox: reply, assign, escalate"
+  default_prompt: "Use $wabi-inbox to show which WhatsApp conversations need a reply and help me answer them."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true

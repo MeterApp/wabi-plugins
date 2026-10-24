@@ -1,0 +1,33 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "wabi",
+  "version": "0.3.0",
+  "description": "The operating platform for WhatsApp Business, by Meter: connect your own WhatsApp Business Account (or start on a simulated sandbox number), send and receive messages, manage templates, contacts and AI support agents, and read usage and costs, from the conversation, the CLI or CI.",
+  "author": {
+    "name": "Meter",
+    "email": "jonathan@getwabi.dev",
+    "url": "https://meterapp.co"
+  },
+  "homepage": "https://getwabi.dev/docs?ref=plugin",
+  "repository": "https://github.com/MeterApp/wabi-plugins",
+  "license": "MIT",
+  "keywords": [
+    "whatsapp-business",
+    "whatsapp-cloud-api",
+    "messaging",
+    "inbox",
+    "customer-support",
+    "ai-agents",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Wabi",
+        "category": "Developer Tools",
+        "privacyPolicyURL": "https://getwabi.dev/privacy?ref=plugin",
+        "termsOfServiceURL": "https://getwabi.dev/terms?ref=plugin"
+      }
+    }
+  }
+}

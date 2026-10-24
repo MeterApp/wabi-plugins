@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi messaging"
+  short_description: "Send messages, templates and bulk sends"
+  default_prompt: "Use $wabi-messaging to send a WhatsApp template to a customer from our Wabi number."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true

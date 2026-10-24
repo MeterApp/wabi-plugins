@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi templates"
+  short_description: "Create, translate and get templates approved"
+  default_prompt: "Use $wabi-templates to create a booking confirmation template in English and Spanish and submit it to Meta."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true

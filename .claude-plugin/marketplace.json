@@ -1,0 +1,18 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "wabi",
+  "owner": {
+    "name": "Meter",
+    "email": "jonathan@getwabi.dev",
+    "url": "https://meterapp.co"
+  },
+  "description": "Wabi by Meter: the operating platform for WhatsApp Business, for agents, apps and CI.",
+  "plugins": [
+    {
+      "name": "wabi",
+      "source": "./",
+      "description": "Three skills plus the hosted Wabi MCP servers: orient in an organization, try the sandbox number, connect the CLI, MCP or an API key, and read pricing and usage.",
+      "category": "productivity"
+    }
+  ]
+}

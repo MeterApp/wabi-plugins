@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi billing"
+  short_description: "Plans, usage and upgrade links"
+  default_prompt: "Use $wabi-billing to show what our Wabi plan includes and how much of it we used this month."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "wabi": {
+      "type": "http",
+      "url": "https://getwabi.dev/api/mcp",
+      "headers": {
+        "X-Wabi-Integration": "plugin"
+      }
+    },
+    "wabi-catalog": {
+      "type": "http",
+      "url": "https://getwabi.dev/api/mcp/catalog",
+      "headers": {
+        "X-Wabi-Integration": "plugin"
+      }
+    }
+  }
+}
