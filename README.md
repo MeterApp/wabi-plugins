@@ -11,6 +11,8 @@ and Cursor.
 - `wabi-templates`: create, translate and get templates approved.
 - `wabi-inbox`: work the inbox, contacts, segments and campaigns.
 - `wabi-webhooks`: receive and verify signed events in your backend.
+- `wabi-agents`: build, test and deploy an AI support agent.
+- `wabi-audit`: audit conversations, agents and costs.
 - `wabi-billing`: plans, usage, Meta's fees, spend budgets and upgrade links.
 
 Install in Claude Code with `/plugin marketplace add MeterApp/wabi-plugins`,

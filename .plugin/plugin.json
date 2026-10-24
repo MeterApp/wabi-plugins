@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wabi",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "The operating platform for WhatsApp Business, by Meter: connect your own WhatsApp Business Account (or start on a simulated sandbox number), send and receive messages, manage templates, contacts and AI support agents, and read usage and costs, from the conversation, the CLI or CI.",
   "author": {
     "name": "Meter",

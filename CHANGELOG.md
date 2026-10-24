@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 (2026-10-24)
+
+- New skills: `wabi-agents` (build, test, version and deploy an AI support
+  agent, session explorer and metrics) and `wabi-audit` (conversation
+  intelligence, support metrics and Meta cost review).
+
 ## 0.3.0 (2026-10-24)
 
 - New skills: `wabi-inbox` (work and set up the team inbox, contacts, consent,

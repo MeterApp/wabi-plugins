@@ -29,10 +29,10 @@ INTEGRATION_HEADER = {"X-Wabi-Integration": "plugin"}
 PRIVATE_REPO = "/".join(("github.com", "MeterApp", "wabi")) + "/"
 PUBLIC_REPO = "https://github.com/MeterApp/wabi-plugins"
 
-SKILLS = ["wabi", "wabi-setup", "wabi-billing", "wabi-connect", "wabi-messaging", "wabi-inbox", "wabi-templates", "wabi-webhooks"]
+SKILLS = ["wabi", "wabi-setup", "wabi-billing", "wabi-connect", "wabi-messaging", "wabi-inbox", "wabi-templates", "wabi-webhooks", "wabi-agents", "wabi-audit"]
 # Skills that tell the agent to call MCP tools declare the dependency so Codex
 # can offer to connect the server when the skill is invoked.
-MCP_DEPENDENT = {"wabi", "wabi-billing", "wabi-connect", "wabi-messaging", "wabi-inbox", "wabi-templates", "wabi-webhooks"}
+MCP_DEPENDENT = {"wabi", "wabi-billing", "wabi-connect", "wabi-messaging", "wabi-inbox", "wabi-templates", "wabi-webhooks", "wabi-agents", "wabi-audit"}
 
 # Every op the server exposes (lib/ops/registry.ts), the ones the skills may
 # name. Same names over MCP, REST (POST /api/v1/<op>) and the CLI. Add an op
@@ -65,6 +65,12 @@ OPS = {
     "sync_templates", "import_templates", "resolve_template", "pin_template_version", "compare_template_versions", "archive_template",
     "delete_template_draft", "list_template_library", "install_template_library", "apply_templates", "export_templates", "list_template_glossary",
     "set_template_glossary_term", "delete_template_glossary_term", "list_template_alerts", "acknowledge_template_alert", "get_template_analytics", "refresh_template_analytics",
+    "list_agents", "get_agent", "get_agent_config_schema", "create_agent", "update_agent", "promote_agent_version",
+    "rollback_agent", "deploy_agent", "undeploy_agent", "archive_agent", "set_agent_secret", "list_agent_secrets",
+    "delete_agent_secret", "test_agent", "suggest_reply", "list_agent_approvals", "decide_agent_approval", "list_agent_sessions",
+    "get_agent_session", "get_agent_metrics", "create_eval_case", "list_eval_cases", "delete_eval_case", "run_eval_suite",
+    "get_eval_run", "replay_conversation", "audit_conversations", "get_conversation_audit", "list_conversation_audits", "add_knowledge_source",
+    "list_knowledge_sources", "get_knowledge_source", "update_knowledge_source", "sync_knowledge_source", "delete_knowledge_source", "search_knowledge",
 }
 TASK_KINDS: set[str] = set()
 OP_PREFIX = re.compile(

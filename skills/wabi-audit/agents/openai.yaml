@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi audit"
+  short_description: "Audit conversations, agents and costs"
+  default_prompt: "Use $wabi-audit to review last week's WhatsApp conversations: what went unresolved and why."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true

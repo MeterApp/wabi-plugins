@@ -1,0 +1,13 @@
+interface:
+  display_name: "Wabi AI agents"
+  short_description: "Build, test and deploy an AI support agent"
+  default_prompt: "Use $wabi-agents to build an AI support agent from our help center and deploy it on the sandbox number."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "wabi"
+      description: "Wabi hosted MCP server"
+      transport: "streamable_http"
+      url: "https://getwabi.dev/api/mcp"
+policy:
+  allow_implicit_invocation: true
