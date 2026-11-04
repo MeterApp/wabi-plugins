@@ -15,19 +15,10 @@ concurrency:
 permissions:
   contents: read
 
+# Structure, manifests, op names and links are validated in the source
+# repository before each publish; this repository only checks that each client
+# installs what was published.
 jobs:
-  structure:
-    name: Structure
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-      - name: Validate repository structure
-        run: python3 scripts/validate_repo.py
-
   clients:
     name: Install in each client
     runs-on: ubuntu-latest

@@ -13,11 +13,18 @@ run. Everything below can be rehearsed on the sandbox number first.
 
 1. **Where are we?** `get_whatsapp_onboarding` returns the current step
    (connect → register a number → send a test → done), the accounts and numbers
-   involved, and a hint naming the op for the next step.
+   involved, and a hint naming the op for the next step. Pass `new_connection: true`
+   to add another account, or `account_id` to resume a specific account. The
+   dashboard Connect button starts a new connection; Finish setup resumes
+   the selected account.
 2. **How to connect.** `get_connect_config` says whether Meta's Embedded
    Signup is available and lists the manual steps and the token's permissions.
-   - **Embedded Signup** happens in the human's browser (Settings → WhatsApp
-     accounts → Connect). Send them there; do not try to drive Facebook login.
+   - **Embedded Signup** happens in the human's browser. `create_connect_link`
+     returns a link (24 hours, only for the person you act for) to a page
+     that walks them through Facebook sign-in and the number's PIN, then
+     tells them to come back to you. Give them the link; do not try to drive
+     Facebook login, and never ask for tokens or PINs in chat. Poll
+     `get_whatsapp_onboarding` until the number is registered.
    - **Manual connect**, when the human gives you a WABA id and a system user
      access token with `whatsapp_business_management` and
      `whatsapp_business_messaging`: `connect_whatsapp_account` with
@@ -31,11 +38,18 @@ run. Everything below can be rehearsed on the sandbox number first.
    phone (a template such as `hello_world`, since no window is open), then
    `get_message` for the delivery timeline.
 5. **Health.** `check_account_health` checks token and permissions, webhook
-   subscription, Meta review and business verification, and each number's
+   subscription, app callback URL and `messages` subscription, recent live
+   inbound delivery, Meta review and business verification, and each number's
    registration, quality rating and messaging limit. Every check says who
    controls it (`meta`, `setup`, `platform`) and the fix; `repair: true`
    re-subscribes missing webhooks (admin). `sync_whatsapp_account` re-reads
-   the account after changes in Meta Business Suite.
+   the account after changes in Meta Business Suite. A WABA subscription alone
+   does not prove inbound delivery: the platform's Meta app must have a verified
+   callback, subscribe to `messages`, and be Published. An unpublished app only
+   receives dashboard test webhooks, including for admins and testers. Missing
+   app configuration is a platform error; `repair` only repairs the WABA
+   subscription. Without a real inbound message in the last 24 hours, delivery
+   and publication remain unverified (warning), even if sandbox tests work.
 
 `list_whatsapp_accounts` and `get_whatsapp_account` show what is connected;
 a number's `id` is the `phone_number_id` every send uses.

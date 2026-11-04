@@ -1,6 +1,6 @@
 ---
 name: wabi-messaging
-description: Send WhatsApp messages through Wabi — text, templates, media, interactive buttons and lists, Flows and bulk sends — with Meta's 24-hour window, consent, plan and duplicate safeguards, then follow delivery and read receipts, retry failures and estimate Meta's cost first. Use for "send a WhatsApp to this customer", "send our template to these numbers", "did my message get delivered", "why did this send fail"; do not use for creating templates (wabi-templates), working inbox conversations (wabi-inbox) or connecting a number (wabi-connect).
+description: Send WhatsApp messages through Wabi (and iMessage, SMS or email with automatic fallback) — text, templates, media, interactive buttons and lists, Flows and bulk sends — with Meta's 24-hour window, consent, plan and duplicate safeguards, then follow delivery and read receipts, retry failures and estimate Meta's cost first. Use for "send a WhatsApp to this customer", "send our template to these numbers", "did my message get delivered", "why did this send fail"; do not use for creating templates (wabi-templates), working inbox conversations (wabi-inbox) or connecting a number (wabi-connect).
 ---
 
 # Send messages
@@ -38,6 +38,25 @@ names the `safeguard` and who controls it (`controlled_by`).
    `confirm: true` after a person approved the estimate).
 7. **Flows:** `list_flows` then `send_flow` (inside the window); answers land in
    `list_flow_submissions`.
+
+## iMessage, SMS and email, with fallback
+
+When the organization connected iMessage (a bridge on a Mac), SMS (its own
+Twilio) or email (their own AgentMail account: `connect_channel { channel:
+"email", provider: "agentmail", api_key, address }`) with `connect_channel` (`list_channels` shows them; `provider:
+"sandbox"` adds free simulated ones), `send_routed_message` sends one text
+over the best channel: by default iMessage → WhatsApp → SMS → email. Address
+the customer with `to` (phone), `email` or `contact_id`; channels the contact
+has no address for are left out. It skips channels the contact was
+unreachable on lately, tries the one they last wrote on first, asks the bridge
+whether the number is on iMessage, and falls back at once on a definitive
+failure (including an email bounce) or after `fallback_after_seconds` without
+a delivered receipt (0 for a channel: only on definitive failures, so never
+twice). Pass `whatsapp_template` or WhatsApp is skipped outside the 24-hour
+window; pass `subject` for a new email thread. `get_message_route` shows each
+step's outcome; `get_contact_channels` (and `get_contact`) shows which
+channels reach a contact and the one they last wrote on, so you can pick
+`channels` yourself.
 
 ## Cost
 

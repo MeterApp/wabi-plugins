@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.1 (2026-11-04)
+
+- The plugin ships no scripts: the repository validator moved out of the
+  plugin into the source repository's tooling, so an install contains only
+  skills, manifests and docs. No change to the skills or the MCP servers.
+
+## 0.5.0 (2026-10-27)
+
+- `wabi-agents`: external handlers ("bring your own agent": a version's
+  `handler` names the HTTPS endpoint that answers each turn, signed requests,
+  handoff, deferred and end-of-session semantics) and deployments on iMessage
+  and SMS channels (`deploy_agent` / `undeploy_agent` with `channel_id`).
+
 ## 0.4.0 (2026-10-24)
 
 - New skills: `wabi-agents` (build, test, version and deploy an AI support

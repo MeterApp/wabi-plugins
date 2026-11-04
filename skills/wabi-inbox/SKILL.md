@@ -18,8 +18,10 @@ contact has a 24-hour service window after their last message.
    contact's messaging, consent and support states).
 3. **Reply:** `reply_to_conversation` with `text` while the window is open,
    a `saved_reply` shortcut with `variables`, or a `template` once it has
-   closed. Pass an `idempotency_key`. A person replying takes the conversation
-   over from its AI agent.
+   closed. On an iMessage, SMS or email conversation (`conversation.channel`)
+   the text goes over that channel, with no window or template. Pass an
+   `idempotency_key`. A person replying takes the conversation over from its
+   AI agent.
 4. **Route:** `claim_conversation` (to yourself), `assign_conversation`
    (a person, a team, or `strategy: least_loaded`), `escalate_conversation`
    with a reason and summary (AI agents stop answering), `set_human_takeover`,
@@ -27,13 +29,19 @@ contact has a 24-hour service window after their last message.
 5. **Close:** `resolve_conversation`; `set_turn_state answered` when the
    customer was answered outside WhatsApp; `reopen_conversation` if needed.
    `add_conversation_note` for internal notes.
+6. **Window closing, thread not done:** `summarize_conversation` gives an AI
+   summary (status, open questions, next steps); `send_to: ["contact"]`
+   emails it to the customer over the connected email channel so they can
+   continue by email, team addresses get it too. Set `window_summary_email`
+   in `update_inbox_settings` to do this automatically on `window.expiring`.
 
 ## Set it up
 
 - `save_saved_reply` / `list_saved_replies` for canned answers with
   `{{contact.first_name}}` and your own variables.
 - `get_inbox_settings` / `update_inbox_settings` (admin): first-response SLA per
-  priority, when `window.expiring` and `conversation.needs_reply` fire.
+  priority, when `window.expiring` and `conversation.needs_reply` fire, and
+  `window_summary_email` (`"contact"`, a team address, or null).
 - Contacts: `upsert_contact` from your CRM, `import_contacts` (CSV, `dry_run`
   first), `record_consent` per purpose with evidence, `set_contact_opt_out`,
   `track_contact_event` for business events segments can use.

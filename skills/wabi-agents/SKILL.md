@@ -1,6 +1,6 @@
 ---
 name: wabi-agents
-description: Build, test and deploy an AI support agent on a WhatsApp number with Wabi — instructions, knowledge sources (help center, sitemap, documents), tools, escalation to people, test turns, golden-answer evals, versions promoted from draft to test to production, rollbacks, and the session explorer with traces, tokens and cost. Use for "set up an AI agent to answer our customers", "why did the agent say that", "add our FAQ to the agent", "deploy the agent on our number"; do not use for the inbox itself (wabi-inbox) or auditing many conversations (wabi-audit).
+description: Build, test and deploy an AI support agent on a WhatsApp number or an iMessage/SMS channel with Wabi — instructions, knowledge sources (help center, sitemap, documents), tools, escalation to people, test turns, golden-answer evals, versions promoted from draft to test to production, rollbacks, the session explorer with traces, tokens and cost, and external handlers ("bring your own agent": your own HTTPS endpoint answers each turn). Use for "set up an AI agent to answer our customers", "why did the agent say that", "add our FAQ to the agent", "deploy the agent on our number", "connect our own agent to Wabi"; do not use for the inbox itself (wabi-inbox) or auditing many conversations (wabi-audit).
 ---
 
 # AI agents
@@ -32,6 +32,24 @@ promoted to **test** (the sandbox number and test chats), then to
    then `promote_agent_version` to `production` and `deploy_agent` on a live
    number (Starter and up). `rollback_agent` restores the previous production
    version; `undeploy_agent` hands the number back to people.
+6. **Channels:** `deploy_agent` with `channel_id` (an iMessage or SMS
+   connection from `list_channels`; a sandbox connection counts as the
+   sandbox) instead of `phone_number_id`. Replies go out on the channel the
+   customer wrote on, with no fallback to another channel. Email
+   conversations get no agent replies.
+
+## Bring your own agent (external handler)
+
+When the customer already runs an agent, set the version's
+`config.handler` to `{type: "external", url: "https://…", signing_secret,
+timeout_seconds}` (the secret is an `http_secret` from `set_agent_secret`).
+Wabi POSTs every customer turn to the URL (signed `X-Wabi-Signature`) and
+sends back the `reply` it returns; `handoff.needed` escalates to the inbox,
+`end_session` closes the session, `deferred` lets the endpoint answer later
+through the API. Wabi keeps sessions, human takeover, approvals, escalation,
+the explorer and usage; external turns are free (not AI replies on Wabi's
+key). `get_agent_config_schema` has the fields; the request and response
+contract is in the docs ("External agents").
 
 ## Watch it
 
@@ -46,4 +64,5 @@ promoted to **test** (the sandbox number and test chats), then to
 
 - Deploying to a live number or promoting to production is the human's call.
 - AI replies on Wabi's model key count against the plan (`get_usage`);
-  turns on the customer's own key (Growth and up) do not.
+  turns on the customer's own key (Growth and up) and external handlers do
+  not.
