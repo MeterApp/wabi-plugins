@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.2 (2026-11-05)
+
+- Claude Code: the optional `api_key` setting is gone; the Wabi MCP server
+  signs in through the browser (`/mcp`), as in Codex and Cursor. On a machine
+  without a browser, sign the CLI in or add the server yourself with your own
+  key (see `wabi-setup`).
+- The Claude manifest drops `privacyPolicyUrl`, `termsOfServiceUrl` and
+  `supportUrl`, which Claude Code's plugin schema does not define (the links
+  stay in the Codex interface and on the directory listing).
+
 ## 0.5.1 (2026-11-04)
 
 - The plugin ships no scripts: the repository validator moved out of the
