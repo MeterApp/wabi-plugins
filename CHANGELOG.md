@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.3 (2026-11-05)
+
+- Claude Code: the optional `api_key` setting is back (`sensitive`, kept in
+  the system's secure credential store, sent only to the Wabi MCP server as
+  `X-Api-Key`), so a machine without a browser can use the plugin. Leave it
+  empty to sign in with the browser (`/mcp`).
+- The Claude manifest sets `privacyPolicyUrl`, `termsOfServiceUrl` and
+  `supportUrl` again: the directory listing reads them.
+
 ## 0.5.2 (2026-11-05)
 
 - Claude Code: the optional `api_key` setting is gone; the Wabi MCP server

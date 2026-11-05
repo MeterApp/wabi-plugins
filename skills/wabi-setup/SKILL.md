@@ -14,7 +14,7 @@ npx @meterapp/wabi login
 opens the browser, the person approves the code, and the CLI saves an API key
 for the organization they choose. On a machine without a browser:
 `npx @meterapp/wabi login --no-browser` prints the code and the link. In CI,
-set `WABI_API_KEY` from a repository secret instead.
+give the CLI an API key from a repository secret instead (see its `--help`).
 
 ## The MCP server
 
