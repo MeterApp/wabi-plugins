@@ -13,8 +13,9 @@ npx @meterapp/wabi login
 
 opens the browser, the person approves the code, and the CLI saves an API key
 for the organization they choose. On a machine without a browser:
-`npx @meterapp/wabi login --no-browser` prints the code and the link. In CI,
-give the CLI an API key from a repository secret instead (see its `--help`).
+`npx @meterapp/wabi login --no-browser` prints the code and the link. For CI,
+create a key in the dashboard and keep it as a GitHub Actions secret; the
+[Wabi docs](https://getwabi.dev/docs/cli?ref=plugin#ci) show the workflow.
 
 ## The MCP server
 
@@ -25,16 +26,18 @@ Claude Code:
 claude mcp add --transport http wabi https://getwabi.dev/api/mcp
 ```
 
-then `/mcp` to sign in. A client that only speaks stdio can use the CLI's
-bridge: `npx @meterapp/wabi mcp`. Prices and plans need no sign-in at
+then `/mcp` to sign in. A client that only speaks stdio, or a machine without a
+browser after the `--no-browser` login, can use the CLI's bridge:
+`npx @meterapp/wabi mcp`. Prices and plans need no sign-in at
 `https://getwabi.dev/api/mcp/catalog`.
 
 ## API keys
 
-A person creates keys in the dashboard (Settings → API keys) or with
-`create_api_key`. A key acts with its creator's role (an owner's key acts as
+A person creates keys in the dashboard
+(https://getwabi.dev/dashboard/settings?ref=plugin, API keys). A key acts with its creator's role (an owner's key acts as
 admin) and can be narrowed with scopes: `messages:read`, `templates:write`,
 `messages:*`, `*:read`, and `billing:purchase` (never implied). Keys belong to
 the organization and keep working if their creator leaves; admins revoke them
-with `revoke_api_key`. The full key (`wabi_…`) is shown once: store it as a
-secret, never in client-side code.
+with `revoke_api_key`. The full key (`wabi_…`) is shown once, to the person
+who created it: they keep it as a secret, never in client-side code, and it
+does not go in this conversation.

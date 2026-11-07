@@ -41,11 +41,12 @@ names the `safeguard` and who controls it (`controlled_by`).
 
 ## iMessage, SMS and email, with fallback
 
-When the organization connected iMessage (a bridge on a Mac), SMS (its own
-Twilio) or email (their own AgentMail account: `connect_channel { channel:
-"email", provider: "agentmail", api_key, address }`) with `connect_channel` (`list_channels` shows them; `provider:
-"sandbox"` adds free simulated ones), `send_routed_message` sends one text
-over the best channel: by default iMessage → WhatsApp → SMS → email. Address
+The person connects iMessage (a bridge on a Mac), SMS (their own Twilio) or
+email (their own AgentMail account) themselves, with their provider's details,
+at https://getwabi.dev/dashboard/integrations?ref=plugin#channels; do not ask
+for those details in chat. `list_channels` shows what is connected, and
+`connect_channel` with `provider: "sandbox"` adds free simulated ones. Then
+`send_routed_message` sends one text over the best channel: by default iMessage → WhatsApp → SMS → email. Address
 the customer with `to` (phone), `email` or `contact_id`; channels the contact
 has no address for are left out. It skips channels the contact was
 unreachable on lately, tries the one they last wrote on first, asks the bridge

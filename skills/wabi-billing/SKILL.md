@@ -12,7 +12,7 @@ cost, never marked up).
 
 ## Plan and usage
 
-1. **Prices** (no credential): `get_pricing` returns every plan with its
+1. **Prices** (no sign-in): `get_pricing` returns every plan with its
    monthly and yearly price, included messages and AI replies, limits, overage
    rates and the default budget cap.
 2. **Usage:** `get_usage` returns messages and AI replies against the

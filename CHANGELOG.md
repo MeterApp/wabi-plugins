@@ -1,23 +1,27 @@
 # Changelog
 
+## 0.5.4 (2026-11-06)
+
+- Claude manifest no longer lists servers itself (they come from `.mcp.json`),
+  no integration header, and the skills send people to the dashboard for any
+  secret instead of carrying it through the conversation.
+- The optional key setting from 0.5.3 is gone: the host signs you in with your
+  browser. On a machine without a browser, sign the CLI in with
+  `npx @meterapp/wabi login --no-browser` (see `wabi-setup`).
+
 ## 0.5.3 (2026-11-05)
 
-- Claude Code: the optional `api_key` setting is back (`sensitive`, kept in
-  the system's secure credential store, sent only to the Wabi MCP server as
-  `X-Api-Key`), so a machine without a browser can use the plugin. Leave it
-  empty to sign in with the browser (`/mcp`).
+- Claude Code: an optional key setting came back for machines without a browser
+  (removed again in 0.5.4).
 - The Claude manifest sets `privacyPolicyUrl`, `termsOfServiceUrl` and
   `supportUrl` again: the directory listing reads them.
 
 ## 0.5.2 (2026-11-05)
 
-- Claude Code: the optional `api_key` setting is gone; the Wabi MCP server
-  signs in through the browser (`/mcp`), as in Codex and Cursor. On a machine
-  without a browser, sign the CLI in or add the server yourself with your own
-  key (see `wabi-setup`).
+- Claude Code: the optional key setting is gone; the Wabi MCP server signs in
+  through the browser (`/mcp`), as in Codex and Cursor.
 - The Claude manifest drops `privacyPolicyUrl`, `termsOfServiceUrl` and
-  `supportUrl`, which Claude Code's plugin schema does not define (the links
-  stay in the Codex interface and on the directory listing).
+  `supportUrl`.
 
 ## 0.5.1 (2026-11-04)
 

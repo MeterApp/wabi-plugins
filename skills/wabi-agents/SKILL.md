@@ -20,8 +20,12 @@ promoted to **test** (the sandbox number and test chats), then to
    `"sitemap"`, or `"markdown"`/`"text"` content), `list_knowledge_sources`,
    `sync_knowledge_source`. `search_knowledge` shows exactly what the agent
    would retrieve for a question.
-3. **Secrets for tools and BYO model keys:** `set_agent_secret` (value never
-   returned), `list_agent_secrets`.
+3. **Secrets for tools and BYO model keys:** the person adds these themselves
+   at https://getwabi.dev/dashboard/agents?ref=plugin#secrets. Tell them which
+   name and kind the configuration expects (model key, HTTP signing secret,
+   Slack webhook, MCP server token); never ask for the value or carry it
+   yourself. `list_agent_secrets` confirms it is there (names only), and the
+   configuration refers to it by name.
 4. **Try it:** `test_agent` with `text` (or a conversation) returns the
    decision (respond, approve, escalate), the reply, cited sources, confidence,
    tool calls (side effects simulated) and cost. Golden cases:
@@ -42,7 +46,8 @@ promoted to **test** (the sandbox number and test chats), then to
 
 When the customer already runs an agent, set the version's
 `config.handler` to `{type: "external", url: "https://…", signing_secret,
-timeout_seconds}` (the secret is an `http_secret` from `set_agent_secret`).
+timeout_seconds}`, where `signing_secret` is the name of an HTTP signing secret
+the person added in the dashboard (step 3).
 Wabi POSTs every customer turn to the URL (signed `X-Wabi-Signature`) and
 sends back the `reply` it returns; `handoff.needed` escalates to the inbox,
 `end_session` closes the session, `deferred` lets the endpoint answer later

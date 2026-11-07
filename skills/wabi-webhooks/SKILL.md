@@ -17,14 +17,17 @@ endpoint, signed with the endpoint's secret.
    window.expiring, template.approved, flow.submitted,
    agent.session.completed…).
 2. **Add an endpoint:** `create_webhook_endpoint` with `url` and optional
-   `event_types`. It returns the signing secret (`whsec_…`) **once**: put it
-   in the receiver's secrets, never in code or chat logs.
+   `event_types`. It returns the signing secret (`whsec_…`) **once**, and the
+   person stores it in the receiver's secrets. Never repeat it in a reply, a
+   file or code. If they cannot see the tool's result, have them add the
+   endpoint at https://getwabi.dev/dashboard/integrations?ref=plugin instead,
+   which shows it to them once.
 3. **Verify every delivery** over the raw body, before parsing:
 
    ```ts
    import { verifyWebhook } from "@meterapp/wabi-sdk/webhooks";
 
-   // signingSecret: the endpoint's whsec_… secret, loaded from your secret store
+   // signingSecret: the endpoint's whsec_… secret, kept on your server
    export async function POST(request: Request) {
      const event = await verifyWebhook(await request.text(), request.headers, signingSecret);
      // dedupe on event.id (webhook-id); answer 2xx fast, work afterwards
@@ -41,8 +44,9 @@ endpoint, signed with the endpoint's secret.
    (status, latency, error, the exact signed body); `replay_webhook_delivery`
    or `replay_webhook_events` resend; `update_webhook_endpoint` changes the
    URL, filter or disables it.
-5. **Rotate:** `rotate_webhook_secret` returns a new secret; during
-   `grace_hours` deliveries carry both signatures, so switch the receiver then.
+5. **Rotate:** `rotate_webhook_secret` returns a new secret once, under the same
+   rule as step 2; during `grace_hours` deliveries carry both signatures, so the
+   person switches the receiver then.
 
 ## Rules
 
