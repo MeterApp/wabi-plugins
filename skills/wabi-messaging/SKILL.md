@@ -28,8 +28,8 @@ names the `safeguard` and who controls it (`controlled_by`).
    Meta's error and its pricing category. `list_messages` filters by
    conversation, contact, number or status; `dead_letter: true` lists sends
    that ran out of retries.
-5. **Fix failures.** Read the error (`get_message`), fix the cause (template,
-   token, window), then `retry_message`. `cancel_message` stops one that has
+5. **Fix failures.** Read the error (`get_message`), fix the cause (template, account
+   connection, window), then `retry_message`. `cancel_message` stops one that has
    not left yet.
 6. **Many recipients:** `send_bulk_messages` queues one message to up to many
    customers with per-recipient variables (Growth plan and up on live numbers;
@@ -41,15 +41,14 @@ names the `safeguard` and who controls it (`controlled_by`).
 
 ## iMessage, SMS and email, with fallback
 
-The person connects iMessage (a bridge on a Mac), SMS (their own Twilio) or
-email (their own AgentMail account) themselves, with their provider's details,
-at https://getwabi.dev/dashboard/integrations?ref=plugin#channels; do not ask
-for those details in chat. `list_channels` shows what is connected, and
-`connect_channel` with `provider: "sandbox"` adds free simulated ones. Then
+The person connects iMessage, SMS or email themselves, in the dashboard:
+https://getwabi.dev/dashboard/integrations?ref=plugin#channels. `list_channels`
+shows what is connected, and `connect_channel` with `provider: "sandbox"` adds
+free simulated ones. Then
 `send_routed_message` sends one text over the best channel: by default iMessage → WhatsApp → SMS → email. Address
 the customer with `to` (phone), `email` or `contact_id`; channels the contact
 has no address for are left out. It skips channels the contact was
-unreachable on lately, tries the one they last wrote on first, asks the bridge
+unreachable on lately, tries the one they last wrote on first, checks
 whether the number is on iMessage, and falls back at once on a definitive
 failure (including an email bounce) or after `fallback_after_seconds` without
 a delivered receipt (0 for a channel: only on definitive failures, so never

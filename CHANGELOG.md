@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.6 (2026-11-08)
+
+- `wabi-messaging` no longer describes third-party providers' details: channels
+  are connected in the dashboard. `wabi-setup` opens with how the plugin signs
+  in and says the plugin never uses an API key. No tool or sign-in change.
+
 ## 0.5.5 (2026-11-08)
 
 - The plugin ships only file types the Claude plugin directory accepts: the SVG logo

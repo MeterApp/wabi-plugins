@@ -5,14 +5,22 @@ description: Connect a machine, an agent or CI to Wabi — sign the CLI in throu
 
 # Connect to Wabi
 
+## The plugin
+
+Install the plugin, then use any tool: your agent opens a Wabi sign-in in the
+browser and keeps the connection. In Claude Code, `/mcp` shows the connection
+and signs in again if needed. Codex and Cursor sign in the same way from their
+connector settings. For scripts, CI and the SDK, create an API key in the
+dashboard and keep it as a secret in that environment; the plugin never uses it.
+
 ## The CLI
 
 ```bash
 npx @meterapp/wabi login
 ```
 
-opens the browser, the person approves the code, and the CLI saves an API key
-for the organization they choose. On a machine without a browser:
+opens the browser, the person approves the code, and the CLI keeps a key for
+the organization they choose. On a machine without a browser:
 `npx @meterapp/wabi login --no-browser` prints the code and the link. For CI,
 create a key in the dashboard and keep it as a GitHub Actions secret; the
 [Wabi docs](https://getwabi.dev/docs/cli?ref=plugin#ci) show the workflow.
@@ -26,9 +34,10 @@ Claude Code:
 claude mcp add --transport http wabi https://getwabi.dev/api/mcp
 ```
 
-then `/mcp` to sign in. A client that only speaks stdio, or a machine without a
-browser after the `--no-browser` login, can use the CLI's bridge:
-`npx @meterapp/wabi mcp`. Prices and plans need no sign-in at
+then `/mcp` to sign in. On a machine without a browser, the person adds the
+server themselves with their own key, as shown in
+https://getwabi.dev/docs/mcp?ref=plugin#claude. A client that only speaks stdio
+can use the CLI's bridge: `npx @meterapp/wabi mcp`. Prices and plans need no sign-in at
 `https://getwabi.dev/api/mcp/catalog`.
 
 ## API keys
