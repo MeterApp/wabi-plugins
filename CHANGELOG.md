@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.5 (2026-11-08)
+
+- The plugin ships only file types the Claude plugin directory accepts: the SVG logo
+  is gone, and Codex and Cursor show the PNG logo instead. No tool, skill or
+  sign-in change.
+
 ## 0.5.4 (2026-11-06)
 
 - Claude manifest no longer lists servers itself (they come from `.mcp.json`),

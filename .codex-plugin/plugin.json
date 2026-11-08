@@ -1,6 +1,6 @@
 {
   "name": "wabi",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "The operating platform for WhatsApp Business, by Meter: connect your own WhatsApp Business Account (or start on a simulated sandbox number), send and receive messages, manage templates, contacts and AI support agents, and read usage and costs, from the conversation, the CLI or CI.",
   "author": {
     "name": "Meter",
@@ -38,8 +38,8 @@
       "What does the Wabi Growth plan include?"
     ],
     "brandColor": "#4F46E5",
-    "composerIcon": "./assets/logo.svg",
-    "logo": "./assets/logo.svg",
+    "composerIcon": "./.claude-plugin/icon.png",
+    "logo": "./.claude-plugin/icon.png",
     "supportURL": "https://getwabi.dev/docs?ref=plugin",
     "privacyPolicyURL": "https://getwabi.dev/privacy?ref=plugin",
     "termsOfServiceURL": "https://getwabi.dev/terms?ref=plugin"
